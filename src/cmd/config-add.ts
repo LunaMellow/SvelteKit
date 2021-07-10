@@ -1,6 +1,7 @@
 import { parse } from "dotenv";
 import { readFileSync, writeFileSync } from "fs";
 import { createInterface } from "readline";
+import { promisify } from "util";
 import { cmd } from ".";
 import { config, encrypt, logger } from "../util";
 
@@ -13,7 +14,7 @@ cmd
   .example("config:add API_SECRET_KEY secretkey --enc=true")
   .example("config:add VITE_API_URL http://api.example.com")
   .option("--enc", "Indicate if the config value should be encrypted.", false)
-  .action((key, value, opts) => {
+  .action(async (key, value, opts) => {
     try {
       if (!/^([A-Z][A-Z0-9]*)(_[A-Z0-9]+)*$/.test(key)) {
         throw new Error(`The key must be in uppercase SNAKE_CASE format, e.g. HTTP_HOST`);
@@ -29,17 +30,16 @@ cmd
           output: process.stdout,
         });
 
-        rl.question(
-          `'${key}' key already existed in '${configPath}', do you want to overwrite? (y/N):`,
-          (ans: string) => {
-            ans = ans.trim().toLowerCase();
-            rl.close();
-
-            if (ans !== "y") {
-              process.exit(0);
-            }
-          }
+        const question = promisify(rl.question).bind(rl);
+        const answer = await question(
+          `'${key}' key already existed in '${configPath}', do you want to overwrite? (y/N):`
         );
+
+        // eslint-disable-next-line
+        // @ts-ignore
+        if (answer.trim().toLowerCase() !== "y") {
+          process.exit(0);
+        }
       }
 
       if (opts.enc) {
