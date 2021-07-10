@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
+    "lib": ["ES2020"],
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "outDir": "build",
+    "paths": {
+      "$lib/*": ["src/client/lib/*"]
+    },
+    "resolveJsonModule": true,
+    "rootDir": "client",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2019"
+  },
+  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.svelte"],
+  "ts-node": {
+    "files": true,
+    "transpileOnly": true
+  }
+}
