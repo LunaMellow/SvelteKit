@@ -11,7 +11,8 @@ cmd
     "Generate a new database migration file. (only for NODE_ENV=development)"
   )
   .example("db:migrate:new create_users")
-  .option("-t, --target", "The target database to work with.", "primary")
+  .example("db:migrate:new create_users --target primary")
+  .option("--target", "The target database to work with.", "primary")
   .action(async (name, opts) => {
     try {
       if (!db[opts.target]) {

@@ -1,5 +1,6 @@
 import { config } from "dotenv";
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
+import { decrypt } from "./crypto";
 
 /**
  * Defines the application configuration that follows [12-factor application](https://12factor.net/) which we rely on
@@ -61,6 +62,12 @@ export interface Config {
    * ```
    */
   loggerRedactPaths: string[];
+
+  /**
+   * Maps to the `KIT_MASTER_KEY` environment variable that can be used to encrypt/decrypt the config values. In
+   * addition, it can also refer to the value in `configs/<KIT_ENV>.key`. By default, it is `""`.
+   */
+  masterKey: string;
 
   /**
    * Indicates the directory/folder to emit the compiled JS and Svelte files for production deployment. The value
@@ -126,27 +133,45 @@ export function getConfig(): Config {
     process.env.NODE_ENV = "development";
   }
 
-  const cwd = process.cwd();
   let rootDir = "src";
   let outDir = "dist";
-
-  try {
-    const tsconfig = JSON.parse(readFileSync(`${cwd}/tsconfig.json`, "utf-8"));
-
-    if (tsconfig?.compilerOptions?.outDir)
-      outDir = tsconfig?.compilerOptions?.outDir.replace(/^\.\//, "");
-
-    if (tsconfig?.compilerOptions?.rootDir)
-      rootDir = tsconfig?.compilerOptions?.rootDir.replace(/^\.\//, "");
-  } catch (err) {
-    // eslint-disable-next-line
-  }
-
+  let masterKey = process.env.KIT_MASTER_KEY?.trim() || "";
+  const cwd = process.cwd();
   const envDir = "configs";
   const configPath = `${cwd}/${envDir}/.env.${process.env.KIT_ENV}`;
-  config({
-    path: configPath,
-  });
+
+  try {
+    const tsconfigPath = `${cwd}/tsconfig.json`;
+    if (existsSync(tsconfigPath)) {
+      const tsconfig = JSON.parse(readFileSync(tsconfigPath, "utf-8"));
+
+      if (tsconfig?.compilerOptions?.outDir) {
+        outDir = tsconfig?.compilerOptions?.outDir.replace(/^\.\//, "");
+      }
+
+      if (tsconfig?.compilerOptions?.rootDir) {
+        rootDir = tsconfig?.compilerOptions?.rootDir.replace(/^\.\//, "");
+      }
+    }
+
+    config({
+      path: configPath,
+    });
+
+    const masterKeyPath = `${cwd}/configs/${process.env.KIT_ENV}.key`;
+    if (existsSync(masterKeyPath)) {
+      const masterKeyFromKeyFile = readFileSync(masterKeyPath, "utf-8").trim();
+
+      if (masterKeyFromKeyFile) {
+        masterKey = masterKeyFromKeyFile;
+      }
+    }
+
+    decryptEnvVar(masterKey);
+  } catch (err) {
+    // eslint-disable-next-line
+    console.log(err);
+  }
 
   return {
     env: process.env.KIT_ENV,
@@ -155,6 +180,7 @@ export function getConfig(): Config {
     loggerRedactPaths: process.env.KIT_LOGGER_REDACT_PATHS
       ? process.env.KIT_LOGGER_REDACT_PATHS.split(",")
       : [],
+    masterKey: masterKey || "",
     outDir,
     port: process.env.PORT || "3000",
     rootDir,
@@ -165,4 +191,22 @@ export function getConfig(): Config {
     signedCookiesSecret: process.env.KIT_SIGNED_COOKIES_SECRET || "",
     workerPath: `${process.env.NODE_ENV === "development" ? rootDir : outDir}/worker`,
   };
+}
+
+export const CONFIG_ENC_SUFFIX = " #encrypted";
+
+export function decryptEnvVar(masterKey: string): void {
+  if (!masterKey) {
+    return;
+  }
+
+  Object.keys(process.env).forEach((key) => {
+    if (process.env[key]?.trim().endsWith(CONFIG_ENC_SUFFIX)) {
+      const val = process.env[key]?.replace(CONFIG_ENC_SUFFIX, "").trim();
+
+      if (val) {
+        process.env[key] = decrypt(masterKey, val);
+      }
+    }
+  });
 }

@@ -2,10 +2,11 @@ import { randomBytes } from "crypto";
 import { cmd } from ".";
 import { logger } from "../util";
 cmd
-    .command("gen:secret", "Generate a cryptographically secure secret key (this is typically used to generate a secret for cookie sessions). (only for NODE_ENV=development)")
-    .action(() => {
+    .command("gen:secret", "Generate a cryptographically secure secret key. (only for NODE_ENV=development)")
+    .option("-s, --size", "The key's byte size. Use 16 for the master key.", 64)
+    .action((opts) => {
     try {
-        console.log(randomBytes(64).toString("hex"));
+        console.log(randomBytes(opts.size).toString("hex"));
     }
     catch (err) {
         logger.error(err);

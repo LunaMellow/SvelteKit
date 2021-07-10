@@ -3,7 +3,9 @@ import { db, logger } from "../util";
 
 cmd
   .command("db:rollback", "Rollback the database schema to previous version.")
-  .option("-t, --target", "The target database to work with.", "primary")
+  .example("db:rollback")
+  .example("db:rollback --target primary")
+  .option("--target", "The target database to work with.", "primary")
   .action(async (opts) => {
     try {
       if (!db[opts.target]) {

@@ -56,6 +56,11 @@ export interface Config {
      */
     loggerRedactPaths: string[];
     /**
+     * Maps to the `KIT_MASTER_KEY` environment variable that can be used to encrypt/decrypt the config values. In
+     * addition, it can also refer to the value in `configs/<KIT_ENV>.key`. By default, it is `""`.
+     */
+    masterKey: string;
+    /**
      * Indicates the directory/folder to emit the compiled JS and Svelte files for production deployment. The value
      * will always be `${compilerOptions.outDir}`.
      */
@@ -104,3 +109,5 @@ export interface Config {
  * @returns The application config.
  */
 export declare function getConfig(): Config;
+export declare const CONFIG_ENC_SUFFIX = " #encrypted";
+export declare function decryptEnvVar(masterKey: string): void;

@@ -60,6 +60,7 @@
     "sade": "^1.7.4",
     "serverless-http": "^2.7.0",
     "sirv": "^1.0.12",
+    "sqlite3": "^5.0.2",
     "stoppable": "^1.1.0",
     "svelte-check": "^2.2.0",
     "svelte-preprocess": "^4.7.3",

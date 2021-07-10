@@ -2,7 +2,9 @@ import { cmd } from ".";
 import { db, logger } from "../util";
 cmd
     .command("db:migrate:status", "Show the list of completed and pending migrations.")
-    .option("-t, --target", "The target database to work with.", "primary")
+    .example("db:migrate:status")
+    .example("db:migrate:status --target primary")
+    .option("--target", "The target database to work with.", "primary")
     .action(async (opts) => {
     try {
         if (!db[opts.target]) {

@@ -1,5 +1,6 @@
 import { config } from "dotenv";
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
+import { decrypt } from "./crypto";
 /**
  * Returns the application config.
  *
@@ -12,24 +13,39 @@ export function getConfig() {
     if (!process.env.NODE_ENV) {
         process.env.NODE_ENV = "development";
     }
-    const cwd = process.cwd();
     let rootDir = "src";
     let outDir = "dist";
+    let masterKey = process.env.KIT_MASTER_KEY?.trim() || "";
+    const cwd = process.cwd();
+    const envDir = "configs";
+    const configPath = `${cwd}/${envDir}/.env.${process.env.KIT_ENV}`;
     try {
-        const tsconfig = JSON.parse(readFileSync(`${cwd}/tsconfig.json`, "utf-8"));
-        if (tsconfig?.compilerOptions?.outDir)
-            outDir = tsconfig?.compilerOptions?.outDir.replace(/^\.\//, "");
-        if (tsconfig?.compilerOptions?.rootDir)
-            rootDir = tsconfig?.compilerOptions?.rootDir.replace(/^\.\//, "");
+        const tsconfigPath = `${cwd}/tsconfig.json`;
+        if (existsSync(tsconfigPath)) {
+            const tsconfig = JSON.parse(readFileSync(tsconfigPath, "utf-8"));
+            if (tsconfig?.compilerOptions?.outDir) {
+                outDir = tsconfig?.compilerOptions?.outDir.replace(/^\.\//, "");
+            }
+            if (tsconfig?.compilerOptions?.rootDir) {
+                rootDir = tsconfig?.compilerOptions?.rootDir.replace(/^\.\//, "");
+            }
+        }
+        config({
+            path: configPath,
+        });
+        const masterKeyPath = `${cwd}/configs/${process.env.KIT_ENV}.key`;
+        if (existsSync(masterKeyPath)) {
+            const masterKeyFromKeyFile = readFileSync(masterKeyPath, "utf-8").trim();
+            if (masterKeyFromKeyFile) {
+                masterKey = masterKeyFromKeyFile;
+            }
+        }
+        decryptEnvVar(masterKey);
     }
     catch (err) {
         // eslint-disable-next-line
+        console.log(err);
     }
-    const envDir = "configs";
-    const configPath = `${cwd}/${envDir}/.env.${process.env.KIT_ENV}`;
-    config({
-        path: configPath,
-    });
     return {
         env: process.env.KIT_ENV,
         envDir,
@@ -37,6 +53,7 @@ export function getConfig() {
         loggerRedactPaths: process.env.KIT_LOGGER_REDACT_PATHS
             ? process.env.KIT_LOGGER_REDACT_PATHS.split(",")
             : [],
+        masterKey: masterKey || "",
         outDir,
         port: process.env.PORT || "3000",
         rootDir,
@@ -45,4 +62,18 @@ export function getConfig() {
         signedCookiesSecret: process.env.KIT_SIGNED_COOKIES_SECRET || "",
         workerPath: `${process.env.NODE_ENV === "development" ? rootDir : outDir}/worker`,
     };
+}
+export const CONFIG_ENC_SUFFIX = " #encrypted";
+export function decryptEnvVar(masterKey) {
+    if (!masterKey) {
+        return;
+    }
+    Object.keys(process.env).forEach((key) => {
+        if (process.env[key]?.trim().endsWith(CONFIG_ENC_SUFFIX)) {
+            const val = process.env[key]?.replace(CONFIG_ENC_SUFFIX, "").trim();
+            if (val) {
+                process.env[key] = decrypt(masterKey, val);
+            }
+        }
+    });
 }
