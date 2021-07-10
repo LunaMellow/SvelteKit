@@ -32,7 +32,7 @@ cmd
 
         const question = promisify(rl.question).bind(rl);
         const answer = await question(
-          `'${key}' key already existed in '${configPath}', do you want to overwrite? (y/N):`
+          `'${key}' key already existed in '${configPath}', do you want to overwrite? (y/N): `
         );
 
         // eslint-disable-next-line
@@ -40,6 +40,8 @@ cmd
         if (answer.trim().toLowerCase() !== "y") {
           process.exit(0);
         }
+
+        rl.close();
       }
 
       if (opts.enc) {

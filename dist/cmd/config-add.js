@@ -24,12 +24,13 @@ cmd
                 output: process.stdout,
             });
             const question = promisify(rl.question).bind(rl);
-            const answer = await question(`'${key}' key already existed in '${configPath}', do you want to overwrite? (y/N):`);
+            const answer = await question(`'${key}' key already existed in '${configPath}', do you want to overwrite? (y/N): `);
             // eslint-disable-next-line
             // @ts-ignore
             if (answer.trim().toLowerCase() !== "y") {
                 process.exit(0);
             }
+            rl.close();
         }
         if (opts.enc) {
             if (!config.masterKey) {
