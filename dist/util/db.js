@@ -39,6 +39,7 @@ export function getDB() {
                     extension,
                     loadExtensions,
                 },
+                useNullAsDefault: client === "sqlite3",
             });
         }
     }
