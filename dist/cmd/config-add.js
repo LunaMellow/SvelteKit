@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from "fs";
 import { createInterface } from "readline";
 import { promisify } from "util";
 import { cmd } from ".";
-import { config, encrypt, logger } from "../util";
+import { config, CONFIG_ENC_SUFFIX, encrypt, logger } from "../util";
 cmd
     .command("config:add <key> <value>", "Add/Encrypt a new config value into `configs/.env.<KIT_ENV>`. Prefix the key with `VITE_` if the config is to be exposed in the client.")
     .example("config:add API_URL http://api.example.com")
@@ -36,7 +36,7 @@ cmd
             if (!config.masterKey) {
                 throw new Error(`Missing 'KIT_MASTER_KEY' environment variable or 'configs/${config.env}.key' is empty/missing.`);
             }
-            valueToWrite = encrypt(config.masterKey, value);
+            valueToWrite = `${encrypt(config.masterKey, value)}${CONFIG_ENC_SUFFIX}`;
         }
         parsedConfig[key] = valueToWrite;
         let newConfig = "";

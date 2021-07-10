@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from "fs";
 import { createInterface } from "readline";
 import { promisify } from "util";
 import { cmd } from ".";
-import { config, encrypt, logger } from "../util";
+import { config, CONFIG_ENC_SUFFIX, encrypt, logger } from "../util";
 
 cmd
   .command(
@@ -51,7 +51,7 @@ cmd
           );
         }
 
-        valueToWrite = encrypt(config.masterKey, value);
+        valueToWrite = `${encrypt(config.masterKey, value)}${CONFIG_ENC_SUFFIX}`;
       }
 
       parsedConfig[key] = valueToWrite;
