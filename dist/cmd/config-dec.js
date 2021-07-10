@@ -1,9 +1,9 @@
 import { parse } from "dotenv";
 import { readFileSync } from "fs";
 import { cmd } from ".";
-import { config, decrypt, logger } from "../util";
+import { CONFIG_ENC_SUFFIX, config, decrypt, logger } from "../util";
 cmd
-    .command("config:dec <key>", "Decrypt a config value in `configs/.env.<KIT_ENV>`.")
+    .command("config:dec <key>", "Decrypt an encrypted config value in `configs/.env.<KIT_ENV>`.")
     .example("config:dec API_SECRET_KEY")
     .action(async (key) => {
     try {
@@ -17,6 +17,9 @@ cmd
         const parsedConfig = parse(readFileSync(configPath, "utf-8"));
         if (!parsedConfig[key]) {
             throw new Error(`The '${key}' key is not defined in '${configPath}'.`);
+        }
+        if (!parsedConfig[key].trim().endsWith(CONFIG_ENC_SUFFIX)) {
+            throw new Error(`The '${key}' key defined in '${configPath}' is not an encrypted key.`);
         }
         console.log(decrypt(config.masterKey, parsedConfig[key]));
     }
