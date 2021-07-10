@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 import { existsSync, readFileSync } from "fs";
-import { decrypt } from "./crypto";
+import { decrypt } from "./crypto.js";
 
 /**
  * Defines the application configuration that follows [12-factor application](https://12factor.net/) which we rely on

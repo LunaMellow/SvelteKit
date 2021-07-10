@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 import { existsSync, readFileSync } from "fs";
-import { decrypt } from "./crypto";
+import { decrypt } from "./crypto.js";
 /**
  * Returns the application config.
  *
