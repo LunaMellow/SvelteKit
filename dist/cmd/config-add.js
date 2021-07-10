@@ -13,7 +13,7 @@ cmd
     .action(async (key, value, opts) => {
     try {
         if (!/^([A-Z][A-Z0-9]*)(_[A-Z0-9]+)*$/.test(key)) {
-            throw new Error(`The key must be in uppercase SNAKE_CASE format, e.g. HTTP_HOST`);
+            throw new Error("The key must be in uppercase SNAKE_CASE format, e.g. HTTP_HOST");
         }
         let valueToWrite = value;
         const configPath = `configs/.env.${config.env}`;
