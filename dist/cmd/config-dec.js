@@ -5,7 +5,7 @@ import { CONFIG_ENC_SUFFIX, config, decrypt, logger } from "../util";
 cmd
     .command("config:dec <key>", "Decrypt an encrypted config value in `configs/.env.<KIT_ENV>`.")
     .example("config:dec API_SECRET_KEY")
-    .action(async (key) => {
+    .action((key) => {
     try {
         if (!config.masterKey) {
             throw new Error(`Missing 'KIT_MASTER_KEY' environment variable or 'configs/${config.env}.key' is empty/missing.`);
@@ -21,7 +21,7 @@ cmd
         if (!parsedConfig[key].trim().endsWith(CONFIG_ENC_SUFFIX)) {
             throw new Error(`The '${key}' key defined in '${configPath}' is not an encrypted key.`);
         }
-        console.log(decrypt(config.masterKey, parsedConfig[key]));
+        console.log(decrypt(config.masterKey, parsedConfig[key].replace(CONFIG_ENC_SUFFIX, "").trim()));
     }
     catch (err) {
         logger.error(err);
