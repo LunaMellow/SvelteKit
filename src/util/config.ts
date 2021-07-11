@@ -159,7 +159,7 @@ export function getConfig(): Config {
     });
 
     const masterKeyPath = `${cwd}/configs/${process.env.KIT_ENV}.key`;
-    if (existsSync(masterKeyPath)) {
+    if (!masterKey && existsSync(masterKeyPath)) {
       const masterKeyFromKeyFile = readFileSync(masterKeyPath, "utf-8").trim();
 
       if (masterKeyFromKeyFile) {
