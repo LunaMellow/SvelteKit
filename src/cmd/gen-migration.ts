@@ -7,11 +7,11 @@ const { format, resolveConfig } = prettier;
 
 cmd
   .command(
-    "db:migrate:new <name>",
+    "gen:migration <name>",
     "Generate a new database migration file. (only for NODE_ENV=development)"
   )
-  .example("db:migrate:new create_users")
-  .example("db:migrate:new create_users --target primary")
+  .example("gen:migration create_users")
+  .example("gen:migration create_users --target primary")
   .option("--target", "The target database to work with.", "primary")
   .action(async (name, opts) => {
     try {

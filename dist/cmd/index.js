@@ -18,9 +18,10 @@ export async function loadAppCommands() {
         });
         const NON_PROD_CMDS = [
             "build",
-            "db-migrate-new",
+            "config-secret-rotate",
             "dev",
             "dk-build",
+            "gen-migration",
             "gen-secret",
             "lint-staged",
             "lint",

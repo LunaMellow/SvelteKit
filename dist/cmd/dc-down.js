@@ -2,7 +2,7 @@ import { execSync } from "child_process";
 import { cmd, enhancedProcessEnv } from ".";
 import { logger } from "../util";
 cmd
-    .command("teardown", "Destroy the Docker Compose cluster.")
+    .command("dc:down", "Destroy the Docker Compose cluster.")
     .option("-f", "The compose configuration file path", ".docker/docker-compose.yml")
     .action(async (opts) => {
     try {

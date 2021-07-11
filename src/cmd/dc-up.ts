@@ -7,7 +7,7 @@ async function sleep(millis: number) {
 }
 
 cmd
-  .command("setup", "Setup the Docker Compose cluster with DB migrate/seed.")
+  .command("dc:up", "Setup the Docker Compose cluster along with DB migrate/seed.")
   .option("-f", "The compose configuration file path.", ".docker/docker-compose.yml")
   .action(async (opts) => {
     try {
