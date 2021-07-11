@@ -21,7 +21,10 @@ cmd
       let prevK = "";
       for (const k of Object.keys(parsedConfig).sort()) {
         if (parsedConfig[k].trim().endsWith(CONFIG_ENC_SUFFIX)) {
-          const decryptedText = decrypt(oldMasterKey, parsedConfig[k]);
+          const decryptedText = decrypt(
+            oldMasterKey,
+            parsedConfig[k].replace(CONFIG_ENC_SUFFIX, "").trim()
+          );
           parsedConfig[k] = `${encrypt(newMasterKey, decryptedText)}${CONFIG_ENC_SUFFIX}`;
         }
 
