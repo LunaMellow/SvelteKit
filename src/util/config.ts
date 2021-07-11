@@ -201,12 +201,16 @@ export function decryptEnvVar(masterKey: string): void {
   }
 
   Object.keys(process.env).forEach((key) => {
-    if (process.env[key]?.trim().endsWith(CONFIG_ENC_SUFFIX)) {
-      const val = process.env[key]?.replace(CONFIG_ENC_SUFFIX, "").trim();
+    try {
+      if (process.env[key]?.trim().endsWith(CONFIG_ENC_SUFFIX)) {
+        const val = process.env[key]?.replace(CONFIG_ENC_SUFFIX, "").trim();
 
-      if (val) {
-        process.env[key] = decrypt(masterKey, val);
+        if (val) {
+          process.env[key] = decrypt(masterKey, val);
+        }
       }
+    } catch (err) {
+      console.error(`Unable to decrypt '${key}' defined in 'configs/.env.${process.env.KIT_ENV}'.`);
     }
   });
 }
