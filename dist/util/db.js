@@ -1,8 +1,7 @@
 import knex from "knex";
-import { getConfig } from "./config";
+import { config } from "./global";
 const DB_URI_PREFIX = "KIT_DB_URI_";
 const DB_POOL_PREFIX = "KIT_DB_POOL_";
-const config = getConfig();
 export function getDB() {
     const db = { primary: null };
     for (const envKey in process.env) {

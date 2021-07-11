@@ -1,6 +1,6 @@
 import type { Knex } from "knex";
 import knex from "knex";
-import { getConfig } from "./config";
+import { config } from "./global";
 
 export interface DB {
   primary: Knex | null;
@@ -9,7 +9,6 @@ export interface DB {
 
 const DB_URI_PREFIX = "KIT_DB_URI_";
 const DB_POOL_PREFIX = "KIT_DB_POOL_";
-const config = getConfig();
 
 export function getDB(): DB {
   const db: DB = { primary: null };
