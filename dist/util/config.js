@@ -63,6 +63,7 @@ export function getConfig() {
         workerPath: `${process.env.NODE_ENV === "development" ? rootDir : outDir}/worker`,
     };
 }
+export default getConfig();
 export const CONFIG_ENC_SUFFIX = " #encrypted";
 export function decryptEnvVar(masterKey) {
     if (!masterKey) {

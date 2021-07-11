@@ -109,5 +109,7 @@ export interface Config {
  * @returns The application config.
  */
 export declare function getConfig(): Config;
+declare const _default: Config;
+export default _default;
 export declare const CONFIG_ENC_SUFFIX = " #encrypted";
 export declare function decryptEnvVar(masterKey: string): void;

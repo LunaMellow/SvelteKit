@@ -1,14 +1,11 @@
 export type { Config } from "./config";
 export { CONFIG_ENC_SUFFIX } from "./config";
-import { getConfig } from "./config";
-export const config = getConfig();
+export { default as config } from "./config";
 
 export type { Logger } from "./logger";
-import { getLogger } from "./logger";
-export const logger = getLogger();
+export { default as logger } from "./logger";
 
 export type { DB } from "./db";
-import { getDB } from "./db";
-export const db = getDB();
+export { default as db } from "./db";
 
 export { encrypt, decrypt } from "./crypto";

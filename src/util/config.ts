@@ -193,6 +193,8 @@ export function getConfig(): Config {
   };
 }
 
+export default getConfig();
+
 export const CONFIG_ENC_SUFFIX = " #encrypted";
 
 export function decryptEnvVar(masterKey: string): void {

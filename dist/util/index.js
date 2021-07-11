@@ -1,8 +1,5 @@
 export { CONFIG_ENC_SUFFIX } from "./config";
-import { getConfig } from "./config";
-export const config = getConfig();
-import { getLogger } from "./logger";
-export const logger = getLogger();
-import { getDB } from "./db";
-export const db = getDB();
+export { default as config } from "./config";
+export { default as logger } from "./logger";
+export { default as db } from "./db";
 export { encrypt, decrypt } from "./crypto";
