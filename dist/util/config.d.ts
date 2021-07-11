@@ -1,3 +1,4 @@
+export declare const CONFIG_ENC_SUFFIX = " #encrypted";
 /**
  * Defines the application configuration that follows [12-factor application](https://12factor.net/) which we rely on
  * the environment variable to determine which application config to load, i.e.
@@ -111,5 +112,4 @@ export interface Config {
 export declare function getConfig(): Config;
 declare const _default: Config;
 export default _default;
-export declare const CONFIG_ENC_SUFFIX = " #encrypted";
 export declare function decryptEnvVar(masterKey: string): void;

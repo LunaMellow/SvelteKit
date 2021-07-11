@@ -1,6 +1,7 @@
 import { config } from "dotenv";
 import { existsSync, readFileSync } from "fs";
 import { decrypt } from "./crypto.js";
+export const CONFIG_ENC_SUFFIX = " #encrypted";
 /**
  * Returns the application config.
  *
@@ -44,7 +45,7 @@ export function getConfig() {
     }
     catch (err) {
         // eslint-disable-next-line
-        console.log(err);
+        console.error(err);
     }
     return {
         env: process.env.KIT_ENV,
@@ -64,7 +65,6 @@ export function getConfig() {
     };
 }
 export default getConfig();
-export const CONFIG_ENC_SUFFIX = " #encrypted";
 export function decryptEnvVar(masterKey) {
     if (!masterKey) {
         return;

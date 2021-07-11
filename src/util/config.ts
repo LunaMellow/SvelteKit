@@ -2,6 +2,8 @@ import { config } from "dotenv";
 import { existsSync, readFileSync } from "fs";
 import { decrypt } from "./crypto.js";
 
+export const CONFIG_ENC_SUFFIX = " #encrypted";
+
 /**
  * Defines the application configuration that follows [12-factor application](https://12factor.net/) which we rely on
  * the environment variable to determine which application config to load, i.e.
@@ -170,7 +172,7 @@ export function getConfig(): Config {
     decryptEnvVar(masterKey);
   } catch (err) {
     // eslint-disable-next-line
-    console.log(err);
+    console.error(err);
   }
 
   return {
@@ -194,8 +196,6 @@ export function getConfig(): Config {
 }
 
 export default getConfig();
-
-export const CONFIG_ENC_SUFFIX = " #encrypted";
 
 export function decryptEnvVar(masterKey: string): void {
   if (!masterKey) {
