@@ -9,7 +9,7 @@ let server;
 const CLIENT_TAG = colors.bold.whiteBright.bgGreen(" client ");
 let client;
 cmd
-    .command("dev", "Start the app server/client/worker for development. (only for NODE_ENV=development)")
+    .command("app:dev", "Start the app server/client/worker for development. (only for NODE_ENV=development)")
     .option("--inspect", "Start the V8 inspector for the server/worker. By default, the inspector port for server is 9229 and for worker is 9230 which can be modified by passing in a different port number.", 9229)
     .example("start")
     .example("start --inspect=9229")

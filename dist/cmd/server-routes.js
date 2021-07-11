@@ -6,7 +6,7 @@ cmd.command("server:routes", "List all the server routes.").action(async () => {
     try {
         const table = new Table({
             head: ["Route", "Location"],
-            colWidths: [400, 400],
+            colWidths: [80, 80],
         });
         for (const route of await getRoutes()) {
             table.push([`${route.method.toUpperCase()} ${route.pattern}`, route.location]);

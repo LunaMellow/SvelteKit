@@ -4,7 +4,7 @@ import { resolve } from "path";
 import { cmd, enhancedProcessEnv } from ".";
 import { config, logger } from "../util";
 cmd
-    .command("build", "Build the app server/client/worker for deployment. (only for NODE_ENV=development)")
+    .command("app:build", "Build the app server/client/worker for deployment. (only for NODE_ENV=development)")
     .action(() => {
     try {
         rmSync(resolve(config.outDir), {

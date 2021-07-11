@@ -14,7 +14,7 @@ let client: ChildProcess;
 
 cmd
   .command(
-    "dev",
+    "app:dev",
     "Start the app server/client/worker for development. (only for NODE_ENV=development)"
   )
   .option(

@@ -6,7 +6,7 @@ import { config, logger } from "../util";
 
 cmd
   .command(
-    "build",
+    "app:build",
     "Build the app server/client/worker for deployment. (only for NODE_ENV=development)"
   )
   .action(() => {
