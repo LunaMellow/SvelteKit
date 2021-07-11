@@ -14,7 +14,7 @@ export default async function getRoutes() {
                 routes.push({
                     method: method === "del" ? "delete" : method,
                     pattern: route,
-                    location: `${fn.replace(`${process.cwd()}/`, "")}#${method}()`,
+                    location: `${fn.replace(`${process.cwd()}/`, "")} - ${method}`,
                 });
             }
         }
