@@ -7,7 +7,8 @@
     "url": "https://github.com/appist/kit/issues"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/ui"
   ],
   "homepage": "https://github.com/appist/kit#readme",
   "license": "MIT",
@@ -131,7 +132,7 @@
       "import": "./dist/server/index.js"
     },
     "./ui": {
-      "import": "./dist/ui/index.js"
+      "import": "./src/ui/index.ts"
     },
     "./util": {
       "import": "./dist/util/index.js"
