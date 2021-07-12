@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 import { existsSync, readFileSync } from "fs";
-import { decrypt } from "./crypto.js";
+import { decrypt } from "./crypto";
 export const CONFIG_ENC_SUFFIX = " #encrypted";
 /**
  * Returns the application config.

@@ -40,6 +40,7 @@ describe("db", () => {
         extension: "ts",
         loadExtensions: [".ts"],
       },
+      useNullAsDefault: false,
     });
   });
 
@@ -75,6 +76,7 @@ describe("db", () => {
         extension: "js",
         loadExtensions: [".js"],
       },
+      useNullAsDefault: false,
     });
 
     expect(db["secondary"]?.client.config).toEqual({
@@ -101,6 +103,7 @@ describe("db", () => {
         extension: "js",
         loadExtensions: [".js"],
       },
+      useNullAsDefault: false,
     });
   });
 });
