@@ -17,7 +17,7 @@
   },
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "tsc",
+    "build": "tsc && rollup -c",
     "clean": "rimraf dist",
     "dev": "npm run build -- -w",
     "lint": "prettier --check . && eslint .",
@@ -30,14 +30,22 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.5",
     "@babel/preset-typescript": "^7.14.5",
+    "@iconify/svelte": "^1.0.4",
     "@prettier/plugin-pug": "^1.16.0",
     "@sveltejs/kit": "^1.0.0-next.122",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@tailwindcss/forms": "^0.3.3",
+    "@tailwindcss/line-clamp": "^0.2.1",
+    "@tailwindcss/typography": "^0.4.1",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "ansi-colors": "^4.1.1",
+    "autoprefixer": "^10.3.0",
     "babel-jest": "^27.0.2",
     "cli-table": "^0.3.6",
+    "clsx": "^1.1.1",
     "compression": "^1.7.4",
+    "cssnano": "^5.0.6",
     "dirname-filename-esm": "^1.1.1",
     "dotenv": "^10.0.0",
     "esbuild": "^0.12.9",
@@ -56,6 +64,11 @@
     "pino-pretty": "^5.1.0",
     "pkg-dir": "^5.0.0",
     "polka": "^0.5.2",
+    "postcss": "^8.3.5",
+    "postcss-100vh-fix": "^1.0.2",
+    "postcss-import": "^14.0.2",
+    "postcss-load-config": "^3.1.0",
+    "postcss-preset-env": "^6.7.0",
     "prettier": "^2.3.1",
     "prettier-plugin-svelte": "^2.3.1",
     "pug": "^3.0.2",
@@ -67,12 +80,17 @@
     "stoppable": "^1.1.0",
     "svelte-check": "^2.2.0",
     "svelte-preprocess": "^4.7.3",
+    "tailwindcss": "^2.2.4",
     "tiny-glob": "^0.2.9",
     "ts-node": "^10.0.0",
     "tslib": "^2.3.0",
     "typescript": "^4.3.4"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@tsconfig/svelte": "^2.0.1",
     "@types/cli-table": "^0.3.0",
     "@types/compression": "^1.7.1",
     "@types/http-proxy": "^1.17.7",
@@ -82,35 +100,46 @@
     "@types/pino": "^6.3.8",
     "@types/polka": "^0.5.2",
     "@types/sade": "^1.7.2",
-    "@types/stoppable": "^1.1.1"
+    "@types/stoppable": "^1.1.1",
+    "rollup": "^2.53.1",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-bundle-size": "^1.0.3",
+    "rollup-plugin-svelte": "^7.1.0",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "exports": {
+    "./client": {
+      "import": "./dist/client/index.js"
+    },
     "./cmd": {
       "import": "./dist/cmd/index.js"
     },
     "./server": {
       "import": "./dist/server/index.js"
     },
+    "./ui": {
+      "import": "./dist/ui/index.js"
+    },
     "./util": {
       "import": "./dist/util/index.js"
-    },
-    "./client": {
-      "import": "./dist/client/index.js"
     }
   },
   "typesVersions": {
     "*": {
+      "client": [
+        "./dist/client/index.d.ts"
+      ],
       "cmd": [
         "./dist/cmd/index.d.ts"
       ],
       "server": [
         "./dist/server/index.d.ts"
       ],
+      "ui": [
+        "./dist/ui/index.d.ts"
+      ],
       "util": [
         "./dist/util/index.d.ts"
-      ],
-      "client": [
-        "./dist/client/index.d.ts"
       ]
     }
   },
