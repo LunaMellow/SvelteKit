@@ -1,5 +1,5 @@
 declare namespace _default {
-    const preprocess: import("svelte-preprocess/dist/types").AutoPreprocessGroup;
+    const preprocess: import("svelte-preprocess/dist/types").PreprocessorGroup[];
     namespace kit {
         const adapter: import("@sveltejs/kit").Adapter;
         namespace files {

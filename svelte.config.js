@@ -1,10 +1,14 @@
 import sveltePreprocess from "svelte-preprocess";
+import { windi as svelteWindiCSSPreprocess } from "svelte-windicss-preprocess";
 
 export default {
-  preprocess: sveltePreprocess({
-    postcss: true,
-    typescript: {
-      tsconfigFile: "./tsconfig.ui.json",
-    },
-  }),
+  preprocess: [
+    svelteWindiCSSPreprocess({}),
+    sveltePreprocess({
+      postcss: true,
+      typescript: {
+        tsconfigFile: "./tsconfig.ui.json",
+      },
+    }),
+  ],
 };
