@@ -15,7 +15,7 @@ interface Props extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["button"
 
 export default class Button extends SvelteComponentTyped<
   Props,
-  { click: WindowEventMap["click"] },
+  { click: WindowEventMap["click"]; dblclick: WindowEventMap["dblclick"] },
   {
     default: {
       block: false;

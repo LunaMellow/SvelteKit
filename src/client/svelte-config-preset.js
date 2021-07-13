@@ -1,8 +1,7 @@
 import preprocess from "svelte-preprocess";
 import { default as adapterNode } from "./adapter-node.js";
-import { getConfig } from "../util/config.js";
+import { config } from "../util";
 
-const config = getConfig();
 const clientDir = `${config.rootDir}/client`;
 
 export default {
