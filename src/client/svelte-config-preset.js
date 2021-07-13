@@ -8,7 +8,9 @@ const clientDir = `${config.rootDir}/client`;
 
 export default {
   preprocess: [
-    svelteWindiCSSPreprocess({}),
+    svelteWindiCSSPreprocess({
+      configPath: "windi.config.js",
+    }),
     sveltePreprocess({
       postcss: true,
     }),
