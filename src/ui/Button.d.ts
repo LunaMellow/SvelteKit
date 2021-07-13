@@ -2,15 +2,15 @@ import type { IconifyIcon } from "@iconify/svelte";
 import type { SvelteComponentTyped } from "svelte";
 
 interface Props extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["button"]> {
-  block: boolean;
-  color: "danger" | "dark" | "info" | "light" | "primary" | "secondary" | "success" | "warning";
-  disabled: boolean;
-  icon: IconifyIcon | null;
-  iconPos: "cover" | "leading" | "trailing";
-  loading: boolean;
-  outline: boolean;
-  shape: "default" | "circle" | "pill" | "round";
-  size: "lg" | "md" | "sm";
+  block?: boolean;
+  color?: "danger" | "dark" | "info" | "light" | "primary" | "secondary" | "success" | "warning";
+  disabled?: boolean;
+  icon?: IconifyIcon | null;
+  iconPos?: "cover" | "leading" | "trailing";
+  loading?: boolean;
+  outline?: boolean;
+  shape?: "default" | "circle" | "pill" | "round";
+  size?: "lg" | "md" | "sm";
 }
 
 export default class Button extends SvelteComponentTyped<

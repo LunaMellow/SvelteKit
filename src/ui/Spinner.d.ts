@@ -1,7 +1,7 @@
 import type { SvelteComponentTyped } from "svelte";
 
 interface Props extends svelte.JSX.HTMLAttributes<SVGElementTagNameMap["svg"]> {
-  color:
+  color?:
     | "danger"
     | "dark"
     | "info"
@@ -11,7 +11,7 @@ interface Props extends svelte.JSX.HTMLAttributes<SVGElementTagNameMap["svg"]> {
     | "success"
     | "warning"
     | "white";
-  size: "lg" | "md" | "sm";
+  size?: "lg" | "md" | "sm";
 }
 
 export default class Spinner extends SvelteComponentTyped<
