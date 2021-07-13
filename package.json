@@ -25,9 +25,7 @@
     "lint:fix": "prettier --write . && eslint --fix .",
     "lint:staged": "lint-staged",
     "prepare": "husky install",
-    "test": "jest",
-    "sb": "start-storybook -p 6006",
-    "sb:build": "build-storybook"
+    "test": "jest"
   },
   "dependencies": {
     "@babel/core": "^7.14.6",
@@ -35,8 +33,11 @@
     "@babel/preset-typescript": "^7.14.5",
     "@iconify/svelte": "^2.0.0-beta.1",
     "@prettier/plugin-pug": "^1.16.0",
-    "@storybook/addon-postcss": "^2.0.0",
     "@sveltejs/kit": "^1.0.0-next.125",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@tailwindcss/forms": "^0.3.3",
+    "@tailwindcss/line-clamp": "^0.2.1",
+    "@tailwindcss/typography": "^0.4.1",
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "ansi-colors": "^4.1.1",
@@ -63,6 +64,7 @@
     "pino-pretty": "^5.1.0",
     "pkg-dir": "^5.0.0",
     "polka": "^0.5.2",
+    "postcss": "^8.3.5",
     "postcss-100vh-fix": "^1.0.2",
     "postcss-import": "^14.0.2",
     "postcss-load-config": "^3.1.0",
@@ -76,9 +78,9 @@
     "sirv": "^1.0.12",
     "sqlite3": "^5.0.2",
     "stoppable": "^1.1.0",
+    "svelte": "^3.38.3",
     "svelte-check": "^2.2.0",
     "svelte-preprocess": "^4.7.3",
-    "svelte-windicss-preprocess": "^4.0.12",
     "tiny-glob": "^0.2.9",
     "ts-node": "^10.0.0",
     "tslib": "^2.3.0",
@@ -86,8 +88,6 @@
   },
   "devDependencies": {
     "@iconify/types": "^1.0.6",
-    "@storybook/addon-actions": "^6.3.4",
-    "@storybook/addon-links": "^6.3.4",
     "@tsconfig/svelte": "^2.0.1",
     "@types/cli-table": "^0.3.0",
     "@types/compression": "^1.7.1",
@@ -98,10 +98,7 @@
     "@types/pino": "^6.3.8",
     "@types/polka": "^0.5.2",
     "@types/sade": "^1.7.2",
-    "@types/stoppable": "^1.1.1",
-    "babel-loader": "^8.2.2",
-    "svelte": "^3.38.3",
-    "svelte-loader": "^3.1.2"
+    "@types/stoppable": "^1.1.1"
   },
   "exports": {
     "./client": {

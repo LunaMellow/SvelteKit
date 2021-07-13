@@ -1,11 +1,7 @@
 import sveltePreprocess from "svelte-preprocess";
-import { windi as svelteWindiCSSPreprocess } from "svelte-windicss-preprocess";
 
 export default {
   preprocess: [
-    svelteWindiCSSPreprocess({
-      configPath: "windi.config.js",
-    }),
     sveltePreprocess({
       postcss: true,
       typescript: {

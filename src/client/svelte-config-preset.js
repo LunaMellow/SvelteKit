@@ -1,5 +1,4 @@
 import sveltePreprocess from "svelte-preprocess";
-import { windi as svelteWindiCSSPreprocess } from "svelte-windicss-preprocess";
 import { default as adapterNode } from "./adapter-node.js";
 import { getConfig } from "../util/config.js";
 
@@ -8,9 +7,6 @@ const clientDir = `${config.rootDir}/client`;
 
 export default {
   preprocess: [
-    svelteWindiCSSPreprocess({
-      configPath: "windi.config.js",
-    }),
     sveltePreprocess({
       postcss: true,
     }),
