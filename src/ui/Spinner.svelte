@@ -1,17 +1,8 @@
-<script lang="ts">
+<script>
   import clsx from "clsx";
 
-  export let color:
-    | "danger"
-    | "dark"
-    | "info"
-    | "light"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning"
-    | "white" = "primary";
-  export let size: "lg" | "md" | "sm" = "md";
+  export let color = "primary";
+  export let size = "md";
 
   const { class: klass, ...props } = $$props;
 </script>

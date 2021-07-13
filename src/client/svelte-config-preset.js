@@ -6,7 +6,9 @@ const config = getConfig();
 const clientDir = `${config.rootDir}/client`;
 
 export default {
-  preprocess: preprocess(),
+  preprocess: preprocess({
+    postcss: true,
+  }),
   kit: {
     adapter: adapterNode({ out: config.outDir }),
     files: {

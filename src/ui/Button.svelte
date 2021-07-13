@@ -1,26 +1,17 @@
-<script lang="ts">
-  import type { IconifyIcon } from "@iconify/svelte";
+<script>
   import clsx from "clsx";
   import Icon from "@iconify/svelte";
   import Spinner from "./Spinner.svelte";
 
-  export let block: boolean = false;
-  export let disabled: boolean = false;
-  export let icon: IconifyIcon = null;
-  export let iconPos: "cover" | "leading" | "trailing" = "cover";
-  export let loading: boolean = false;
-  export let outline: boolean = false;
-  export let shape: "default" | "circle" | "pill" | "round" = "default";
-  export let size: "lg" | "md" | "sm" = "md";
-  export let color:
-    | "danger"
-    | "dark"
-    | "info"
-    | "light"
-    | "primary"
-    | "secondary"
-    | "success"
-    | "warning" = "primary";
+  export let block = false;
+  export let disabled = false;
+  export let icon = null;
+  export let iconPos = "cover";
+  export let loading = false;
+  export let outline = false;
+  export let shape = "default";
+  export let size = "md";
+  export let color = "primary";
 
   const { class: klass, ...props } = $$props;
 </script>
