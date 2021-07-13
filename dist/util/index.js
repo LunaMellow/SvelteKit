@@ -1,3 +1,2 @@
-export { CONFIG_ENC_SUFFIX } from "./config";
-export { encrypt, decrypt } from "./crypto";
+export { CONFIG_ENC_SUFFIX, encrypt, decrypt } from "./config";
 export { config, db, logger } from "./global";

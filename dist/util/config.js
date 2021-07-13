@@ -1,7 +1,9 @@
+import { createCipheriv, createDecipheriv, randomBytes } from "crypto";
 import { config } from "dotenv";
 import { existsSync, readFileSync } from "fs";
-import { decrypt } from "./crypto";
 export const CONFIG_ENC_SUFFIX = " #encrypted";
+const ALGO = "aes-256-ctr";
+const IV_SIZE = 16;
 /**
  * Returns the application config.
  *
@@ -82,4 +84,17 @@ export function decryptEnvVar(masterKey) {
             }
         }
     });
+}
+export function encrypt(secret, text) {
+    const iv = randomBytes(IV_SIZE);
+    const cipher = createCipheriv(ALGO, secret, iv);
+    return `${Buffer.concat([cipher.update(text), cipher.final()]).toString("hex")}${iv.toString("hex")}`;
+}
+export function decrypt(secret, encText) {
+    const size = IV_SIZE * 2;
+    const decipher = createDecipheriv(ALGO, secret, Buffer.from(encText.slice(-size), "hex"));
+    return Buffer.concat([
+        decipher.update(Buffer.from(encText.slice(0, encText.length - size), "hex")),
+        decipher.final(),
+    ]).toString();
 }

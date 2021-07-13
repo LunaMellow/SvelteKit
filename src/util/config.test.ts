@@ -77,4 +77,14 @@ describe("config", () => {
 
     cwdSpy.mockRestore();
   });
+
+  test("should encrypt and decrypt fine", () => {
+    const { encrypt, decrypt } = require("./config");
+    const secret = "1aed9d5fcb8dff40d3dde43024177621";
+    const text = "foobar";
+
+    const encText = encrypt(secret, text);
+    expect(encText.length).toBeGreaterThan(0);
+    expect(decrypt(secret, encText)).toBe(text);
+  });
 });
