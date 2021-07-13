@@ -1,2 +1,2 @@
-export { default as Button } from "./Button.svelte";
-export { default as Spinner } from "./Spinner.svelte";
+export Button from "./Button";
+export Spinner from "./Spinner";
