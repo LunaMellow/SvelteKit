@@ -36,7 +36,7 @@
     "@iconify/svelte": "^2.0.0-beta.1",
     "@prettier/plugin-pug": "^1.16.0",
     "@storybook/addon-postcss": "^2.0.0",
-    "@sveltejs/kit": "^1.0.0-next.122",
+    "@sveltejs/kit": "^1.0.0-next.125",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/line-clamp": "^0.2.1",
@@ -93,10 +93,7 @@
   "devDependencies": {
     "@iconify/types": "^1.0.6",
     "@storybook/addon-actions": "^6.3.4",
-    "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.3.4",
-    "@storybook/addon-svelte-csf": "^1.0.0",
-    "@storybook/svelte": "^6.1.21",
     "@tsconfig/svelte": "^2.0.1",
     "@types/cli-table": "^0.3.0",
     "@types/compression": "^1.7.1",
@@ -109,7 +106,6 @@
     "@types/sade": "^1.7.2",
     "@types/stoppable": "^1.1.1",
     "babel-loader": "^8.2.2",
-    "storybook-builder-vite": "^0.0.2",
     "svelte": "^3.38.3",
     "svelte-loader": "^3.1.2"
   },
