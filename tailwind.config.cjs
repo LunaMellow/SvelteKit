@@ -10,7 +10,7 @@ module.exports = {
     require("@tailwindcss/typography"),
   ],
   purge: {
-    content: ["./src/ui/**/*.svelte", "./src/ui/**/*.html"],
+    content: ["./src/ui/**/*.{html,svelte}"],
     options: {
       defaultExtractor: (content) => [
         ...tailwindExtractor(content),
