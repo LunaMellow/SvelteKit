@@ -1,0 +1,23 @@
+<script>
+  import { Button } from "../../src/ui";
+</script>
+
+# h1
+
+## h2
+
+### h3
+
+#### h4
+
+##### h5
+
+###### h6
+
+Code Snippet:
+
+```js
+function helloWorld() {
+  console.log("hello world");
+}
+```

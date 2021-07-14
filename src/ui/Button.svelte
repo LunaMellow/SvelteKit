@@ -13,10 +13,11 @@
   export let size = "md";
   export let color = "primary";
 
-  const { class: klass, ...props } = $$props;
+  const { class: klass, style, ...props } = $$props;
 </script>
 
 <button
+  {...$$restProps}
   type="button"
   class={clsx(
     {
@@ -70,7 +71,7 @@
     "inline-flex items-center text-white text-center focus:outline-none",
     klass
   )}
-  style={props.style}
+  {style}
   on:click
   on:dblclick
 >

@@ -17,7 +17,12 @@ cmd
     try {
         const optsArr = [`--host=${config.host}`, `--port=${parseInt(config.port) + 1}`];
         client = exec(`svelte-kit dev ${optsArr.join(" ")}`, {
-            env: enhancedProcessEnv(import.meta),
+            env: {
+                ...enhancedProcessEnv(import.meta),
+                ...{
+                    TAILWIND_MODE: "watch",
+                },
+            },
         });
         client.stdout?.on("data", (data) => {
             process.stdout.write(data

@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   darkMode: "class",
   mode: "jit",
@@ -8,10 +10,21 @@ module.exports = {
     require("@tailwindcss/typography"),
   ],
   purge: {
-    content: ["./src/ui/**/*.{html,svelte}"],
+    content: ["./docs/**/*.{html,svelte}", "./src/ui/**/*.{html,svelte}"],
   },
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: colors.blue,
+        secondary: colors.coolGray,
+        success: colors.green,
+        info: colors.sky,
+        warning: colors.amber,
+        danger: colors.red,
+        dark: colors.coolGray,
+        light: colors.coolGray,
+      },
+    },
   },
   variants: {
     extend: {},

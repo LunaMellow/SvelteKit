@@ -102,3 +102,9 @@ typings/
 
 # TernJS port file
 .tern-port
+
+# SvelteKit files
+.DS_Store
+node_modules
+/.svelte-kit
+/package

@@ -1,5 +1,11 @@
 {
+  "editor.quickSuggestions": {
+    "strings": true
+  },
   "emmet.includeLanguages": {
     "postcss": "css"
+  },
+  "files.associations": {
+    "*.svx": "markdown"
   }
 }

@@ -19,8 +19,10 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "tsc",
+    "build:docs": "svelte-kit build",
     "clean": "rimraf dist",
     "dev": "npm run build -- -w",
+    "dev:docs": "TAILWIND_MODE=watch svelte-kit dev",
     "lint": "prettier --check . && eslint .",
     "lint:fix": "prettier --write . && eslint --fix .",
     "lint:staged": "lint-staged",
@@ -33,7 +35,7 @@
     "@babel/preset-typescript": "^7.14.5",
     "@iconify/svelte": "^2.0.0-beta.1",
     "@prettier/plugin-pug": "^1.16.0",
-    "@sveltejs/kit": "^1.0.0-next.125",
+    "@sveltejs/kit": "^1.0.0-next.127",
     "@tailwindcss/aspect-ratio": "^0.2.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/line-clamp": "^0.2.1",
@@ -57,6 +59,7 @@
     "jest": "^27.0.4",
     "knex": "^0.95.6",
     "lint-staged": "^11.0.0",
+    "mdsvex": "^0.9.8",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.9",
     "pg": "^8.6.0",
@@ -88,6 +91,7 @@
   },
   "devDependencies": {
     "@iconify/types": "^1.0.6",
+    "@sveltejs/adapter-static": "^1.0.0-next.13",
     "@tsconfig/svelte": "^2.0.1",
     "@types/cli-table": "^0.3.0",
     "@types/compression": "^1.7.1",
@@ -161,16 +165,28 @@
       "plugin:@typescript-eslint/recommended",
       "prettier"
     ],
+    "overrides": [
+      {
+        "files": [
+          "*.svelte"
+        ],
+        "processor": "svelte3/svelte3"
+      }
+    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "sourceType": "module",
       "ecmaVersion": 2021
     },
     "plugins": [
+      "svelte3",
       "@typescript-eslint"
     ],
     "rules": {
       "@typescript-eslint/no-var-requires": 0
+    },
+    "settings": {
+      "svelte3/typescript": true
     }
   },
   "eslintIgnore": [
@@ -181,17 +197,24 @@
   ],
   "jest": {
     "coveragePathIgnorePatterns": [
+      "/.svelte-kit/",
       "/dist/",
       "/node_modules/",
       "/__fixtures__/"
     ],
     "testPathIgnorePatterns": [
+      "/.svelte-kit/",
       "/dist/",
       "/node_modules/",
       "/__fixtures__/"
     ]
   },
   "lint-staged": {
+    "*.{svelte}": [
+      "svelte-check",
+      "eslint --fix",
+      "prettier --parser=typescript --write"
+    ],
     "*.{ts}": [
       "eslint --fix",
       "prettier --parser=typescript --write"
