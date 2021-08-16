@@ -210,12 +210,12 @@
     ]
   },
   "lint-staged": {
-    "*.{svelte}": [
+    "*.svelte": [
       "svelte-check",
       "eslint --fix",
       "prettier --parser=typescript --write"
     ],
-    "*.{ts}": [
+    "*.ts": [
       "eslint --fix",
       "prettier --parser=typescript --write"
     ],
